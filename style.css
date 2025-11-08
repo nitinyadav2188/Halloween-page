@@ -1,0 +1,469 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Creepster', cursive, Arial, sans-serif;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a0a2e 50%, #2d1b3d 100%);
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="28" font-size="28">🧟</text></svg>'), auto;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&display=swap');
+
+        /* Animated fog effect */
+        .fog {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .fog-layer {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><path d="M0,50 Q250,20 500,50 T1000,50 L1000,100 L0,100 Z" fill="%23ffffff" opacity="0.03"/></svg>') repeat-x;
+            animation: fog-drift 30s linear infinite;
+        }
+
+        .fog-layer:nth-child(2) {
+            animation-duration: 45s;
+            animation-delay: -15s;
+            opacity: 0.5;
+        }
+
+        @keyframes fog-drift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Floating bats */
+        .bat {
+            position: fixed;
+            font-size: 2rem;
+            animation: fly 15s ease-in-out infinite;
+            z-index: 2;
+            opacity: 0.6;
+        }
+
+        @keyframes fly {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, -50px) rotate(10deg); }
+            50% { transform: translate(200px, 20px) rotate(-10deg); }
+            75% { transform: translate(100px, -30px) rotate(5deg); }
+        }
+
+        /* Spider web decoration */
+        .web {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            opacity: 0.3;
+            z-index: 2;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M100,0 L100,200 M0,100 L200,100 M25,25 L175,175 M175,25 L25,175" stroke="%23ffffff" stroke-width="0.5" fill="none"/><circle cx="100" cy="100" r="30" stroke="%23ffffff" stroke-width="0.5" fill="none"/><circle cx="100" cy="100" r="60" stroke="%23ffffff" stroke-width="0.5" fill="none"/></svg>') no-repeat;
+        }
+
+        .web-bottom {
+            top: auto;
+            bottom: 0;
+            right: auto;
+            left: 0;
+            transform: scaleX(-1);
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px 60px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Nosifer', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: #ff6b00;
+            text-shadow: 0 0 20px #ff6b00, 0 0 40px #ff0000, 3px 3px 0 #000;
+            margin-bottom: 20px;
+            animation: flicker 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 20px #ff6b00, 0 0 40px #ff0000; }
+            50% { opacity: 0.8; text-shadow: 0 0 10px #ff6b00, 0 0 20px #ff0000; }
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #ffa500;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        /* Jack-o-lantern animation */
+        .pumpkin-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .pumpkin {
+            font-size: 8rem;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="28" font-size="28">☠️</text></svg>'), pointer;
+            transition: transform 0.3s ease;
+            animation: bob 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px #ff6b00);
+        }
+
+        .pumpkin:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .pumpkin:nth-child(2) {
+            animation-delay: -1s;
+        }
+
+        .pumpkin:nth-child(3) {
+            animation-delay: -2s;
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Feature cards */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .card {
+            background: rgba(26, 10, 46, 0.8);
+            border: 2px solid #ff6b00;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="28" font-size="28">🧟</text></svg>'), auto;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(255, 107, 0, 0.5);
+            border-color: #ffa500;
+        }
+
+        .card:hover::before {
+            top: -30%;
+            left: -30%;
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: spin-slow 20s linear infinite;
+        }
+
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .card h3 {
+            font-family: 'Creepster', cursive;
+            font-size: 1.8rem;
+            color: #ff6b00;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .card p {
+            color: #ffa500;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* CTA Button */
+        .cta {
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #1a0000, #4d0000, #1a0000);
+            border: 3px solid #8b0000;
+            color: #ff0000;
+            font-family: 'Creepster', cursive;
+            font-size: 1.8rem;
+            padding: 20px 50px;
+            border-radius: 10px;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="28" font-size="28">☠️</text></svg>'), pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 30px rgba(139, 0, 0, 0.7), inset 0 -3px 10px rgba(0, 0, 0, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #8b0000;
+        }
+
+        .cta-button::before {
+            content: '⚠️';
+            position: absolute;
+            left: 15px;
+            font-size: 1.5rem;
+        }
+
+        .cta-button::after {
+            content: '⚠️';
+            position: absolute;
+            right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 50px rgba(139, 0, 0, 1), inset 0 -3px 15px rgba(0, 0, 0, 0.9);
+            background: linear-gradient(135deg, #2d0000, #660000, #2d0000);
+            border-color: #ff0000;
+            animation: pulse-danger 0.5s ease-in-out infinite;
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes pulse-danger {
+            0%, 100% { box-shadow: 0 10px 50px rgba(139, 0, 0, 1); }
+            50% { box-shadow: 0 10px 50px rgba(255, 0, 0, 1); }
+        }
+
+        /* Ghost effect */
+        .ghost {
+            position: fixed;
+            font-size: 3rem;
+            bottom: 20px;
+            animation: float 4s ease-in-out infinite, drift 8s ease-in-out infinite;
+            z-index: 2;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        @keyframes drift {
+            0%, 100% { left: -100px; }
+            50% { left: calc(100% + 100px); }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #ffa500;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .pumpkin {
+                font-size: 5rem;
+            }
+        }
+
+        /* Explosion and crack effect */
+        .explosion-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #ff0000, #000000);
+            z-index: 9999;
+            display: none;
+            opacity: 0;
+        }
+
+        .explosion-overlay.active {
+            display: block;
+            animation: explode 0.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .crack-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            pointer-events: none;
+            display: none;
+        }
+
+        .crack-overlay.active {
+            display: block;
+        }
+
+        .crack {
+            position: absolute;
+            background: linear-gradient(45deg, transparent 48%, #000 48%, #000 52%, transparent 52%);
+            opacity: 0.8;
+        }
+
+        .crack1 {
+            width: 3px;
+            height: 100%;
+            left: 30%;
+            top: 0;
+            transform: rotate(15deg);
+            transform-origin: top center;
+        }
+
+        .crack2 {
+            width: 3px;
+            height: 100%;
+            left: 60%;
+            top: 0;
+            transform: rotate(-20deg);
+            transform-origin: top center;
+        }
+
+        .crack3 {
+            width: 100%;
+            height: 3px;
+            left: 0;
+            top: 40%;
+            transform: rotate(5deg);
+        }
+
+        .crack4 {
+            width: 70%;
+            height: 3px;
+            right: 0;
+            top: 60%;
+            transform: rotate(-8deg);
+        }
+
+        .crack5 {
+            width: 3px;
+            height: 60%;
+            left: 50%;
+            top: 20%;
+            transform: rotate(-10deg);
+        }
+
+        .emerging-creature {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 10001;
+            font-size: 15rem;
+            display: none;
+            filter: drop-shadow(0 0 50px #ff0000);
+        }
+
+        .emerging-creature.active {
+            display: block;
+            animation: emerge 2s ease-out forwards;
+        }
+
+        @keyframes emerge {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.3) rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        .reset-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #8b0000;
+            color: #fff;
+            border: 2px solid #ff0000;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-family: 'Creepster', cursive;
+            font-size: 1.2rem;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="28" font-size="28">☠️</text></svg>'), pointer;
+            z-index: 10002;
+            display: none;
+            box-shadow: 0 5px 20px rgba(139, 0, 0, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .reset-button.active {
+            display: block;
+        }
+
+        .reset-button:hover {
+            background: #ff0000;
+            transform: scale(1.1);
+        }

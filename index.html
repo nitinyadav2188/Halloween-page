@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spooky Season is Here</title>
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+    <!-- Atmospheric effects -->
+    <div class="fog">
+        <div class="fog-layer"></div>
+        <div class="fog-layer"></div>
+    </div>
+    
+    <div class="web"></div>
+    <div class="web web-bottom"></div>
+    
+    <div class="bat" style="top: 10%; left: 20%; animation-delay: 0s;">🦇</div>
+    <div class="bat" style="top: 30%; right: 15%; animation-delay: -5s;">🦇</div>
+    <div class="bat" style="top: 50%; left: 70%; animation-delay: -10s;">🦇</div>
+    
+    <div class="ghost">👻</div>
+
+    <!-- Explosion and crack effects -->
+    <div class="explosion-overlay" id="explosionOverlay"></div>
+    <div class="crack-overlay" id="crackOverlay">
+        <div class="crack crack1"></div>
+        <div class="crack crack2"></div>
+        <div class="crack crack3"></div>
+        <div class="crack crack4"></div>
+        <div class="crack crack5"></div>
+    </div>
+    <div class="emerging-creature" id="creature">👹</div>
+    <button class="reset-button" id="resetButton">Reset Screen</button>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>ENTER IF YOU DARE</h1>
+            <p>🎃 Welcome to the Spookiest Season 🎃</p>
+            
+            <div class="pumpkin-container">
+                <div class="pumpkin" onclick="this.innerHTML='😱'">🎃</div>
+                <div class="pumpkin" onclick="this.innerHTML='👻'">🎃</div>
+                <div class="pumpkin" onclick="this.innerHTML='💀'">🎃</div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="card">
+                <div class="card-icon">🏚️</div>
+                <h3>Haunted Houses</h3>
+                <p>Step into the darkness where shadows whisper and floorboards creak. Are you brave enough to explore?</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🕷️</div>
+                <h3>Creepy Crawlies</h3>
+                <p>Watch where you step! Our eight-legged friends have spun their webs everywhere this season.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🧙‍♀️</div>
+                <h3>Witching Hour</h3>
+                <p>When the clock strikes midnight, magic fills the air. Potions bubble and spells are cast!</p>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <button class="cta-button" onclick="triggerExplosion()">
+                Join the Fright Night
+            </button>
+        </section>
+    </div>
+
+    <footer>
+        <p>🌙 Have a Spooktacular Halloween! 🌙</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">© 2025 Haunted Hollow • All Frights Reserved</p>
+    </footer>
+
+    <script>
+        // Explosion effect
+        function triggerExplosion() {
+            const explosion = document.getElementById('explosionOverlay');
+            const cracks = document.getElementById('crackOverlay');
+            const creature = document.getElementById('creature');
+            const resetBtn = document.getElementById('resetButton');
+            
+            // Create explosion sound effect (visual representation)
+            document.body.style.animation = 'shake 0.5s ease-in-out';
+            
+            // Show explosion
+            explosion.classList.add('active');
+            
+            // After explosion, show cracks
+            setTimeout(() => {
+                explosion.style.opacity = '0.3';
+                cracks.classList.add('active');
+            }, 500);
+            
+            // Creature emerges from the crack
+            setTimeout(() => {
+                creature.classList.add('active');
+                resetBtn.classList.add('active');
+            }, 1000);
+        }
+
+        // Reset function
+        document.getElementById('resetButton').addEventListener('click', function() {
+            const explosion = document.getElementById('explosionOverlay');
+            const cracks = document.getElementById('crackOverlay');
+            const creature = document.getElementById('creature');
+            const resetBtn = document.getElementById('resetButton');
+            
+            explosion.classList.remove('active');
+            cracks.classList.remove('active');
+            creature.classList.remove('active');
+            resetBtn.classList.remove('active');
+            
+            explosion.style.opacity = '0';
+            document.body.style.animation = '';
+        });
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+                20%, 40%, 60%, 80% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add random spiders
+        function createSpider() {
+            const spider = document.createElement('div');
+            spider.style.position = 'fixed';
+            spider.style.fontSize = '1.5rem';
+            spider.style.zIndex = '5';
+            spider.textContent = '🕷️';
+            spider.style.left = Math.random() * 100 + '%';
+            spider.style.top = '-50px';
+            spider.style.transition = 'top 5s linear';
+            document.body.appendChild(spider);
+            
+            setTimeout(() => {
+                spider.style.top = '100vh';
+            }, 100);
+            
+            setTimeout(() => {
+                spider.remove();
+            }, 5100);
+        }
+
+        // Drop spiders occasionally
+        setInterval(createSpider, 3000);
+
+        // Make the page more interactive
+        document.addEventListener('mousemove', (e) => {
+            const ghost = document.querySelector('.ghost');
+            if (Math.random() > 0.99) {
+                ghost.style.left = e.clientX + 'px';
+                ghost.style.bottom = (window.innerHeight - e.clientY) + 'px';
+            }
+        });
+    </script>
+</body>
+</html>
