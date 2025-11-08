@@ -2,7 +2,7 @@
 
 A fully animated **Halloween-themed landing page** built using **pure HTML, CSS, and JavaScript**, featuring fog effects, flying bats, floating pumpkins, glowing lights, and spooky interactive elements! 👻  
 
-![Spooky Season Preview]()
+![Spooky Season Preview](images/spooky.png)
 
 ---
 
